@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Coffee Pot: Shopping</title>
+    <style>
+div.black {
+  color: black;
+  font-weight: normal;
+}
+div.red {
+  color: red;
+  font-weight: bold;
+}
+    </style>
+    <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="coffeepot.js"></script>
+    <script type="text/javascript">
+$(document).ready(function() {
+
+  var ViewModel = {
+
+    init: function() {
+      var goods = this.Model.goods();
+      var values = this.values;
+      $.each(goods, function(i, g) {
+        values['item{0}_name'.tmpl(i)]  = g.name;
+        values['item{0}_price'.tmpl(i)] = g.price;
+        values['item{0}_count'.tmpl(i)] = 0;
+      });
+      this.updateResult();
+    },
+
+    bindings: function() {
+      var goods_count = this.Model.goods().length;
+      var bs = {
+        amount:    'text',
+        payment:   'text',
+        tax:       'text',
+        totalcost: 'text',
+        totalcostcolor: 'class'
+      };
+      for (var i = 0; i < goods_count; i++) {
+        bs['item{0}_name'.tmpl(i)]  = 'text';
+        bs['item{0}_price'.tmpl(i)] = 'text';
+        bs['item{0}_count'.tmpl(i)] = 'val:int';
+      }
+      return bs;
+    },
+
+    events: function() {
+      var goods = this.Model.goods();
+      var es = {};
+      $.each(goods, function(i, g) {
+        es['item{0}_count'.tmpl(i)] = {
+          change: function(e) {
+            this.updateResult();
+          }
+        };
+/*
+        es['item{0}_count'.tmpl(i)] = {
+          keyup: function(e) {
+            this.updateResult();
+          }
+        };
+*/
+        es['item{0}_clear'.tmpl(i)] = {
+          click: function(e) {
+            this.values['item{0}_count'.tmpl(i)] = 0;
+            this.updateResult();
+          }
+        };
+      });
+      return es;
+    },
+
+    updateResult: function() {
+      // Calculation.
+      var values = this.values;
+      var counts = $.map(this.Model.goods(), function(g, i) {
+        return values['item{0}_count'.tmpl(i)];
+      });
+      var result = this.Model.calculate(counts);
+      // Print result.
+      for (var name in result) {
+        values[name] = result[name];
+      }
+      values.totalcostcolor = result.totalcost <= 5000 ? 'black' : 'red';
+    }
+  };
+
+  var Model = {
+
+    goods: function() {
+      return [
+        {name: 'きび団子',       price: 300},
+        {name: '大手まんじゅう', price: 400},
+        {name: 'むらすずめ',     price: 500}
+      ];
+    },
+
+    tax_rate: function() {
+      return 1.05;
+    },
+
+    calculate: function(counts) {
+      var amount = 0;
+      var payment = 0;
+      var cost = this.cost;
+      var goods = this.goods();
+      $.each(counts, function(i, count) {
+        amount += count;
+        payment += goods[i].price * count;
+      });
+      var totalcost = payment * this.tax_rate();
+      var tax = totalcost - payment;
+      return {
+        amount: amount, payment: payment, tax: tax, totalcost: totalcost
+      };
+    }
+  };
+
+  CP.set(ViewModel, Model);
+
+});
+    </script>
+  </head>
+<body>
+  <h1>Coffee Pot: Shopping</h1>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:12em;">品名(値段)</th>
+        <th style="width:13em;">個数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <span id="item0_name"></span>(<span id="item0_price"></span>円):
+        </td>
+        <td><input id="item0_count" type="number" min="0"><button id="item0_clear">X</button>個</td>
+      </tr>
+      <tr>
+        <td>
+          <span id="item1_name"></span>(<span id="item1_price"></span>円):
+        </td>
+        <td><input id="item1_count" type="number" min="0"><button id="item1_clear">X</button>個</td>
+      </tr>
+      <tr>
+        <td>
+          <span id="item2_name"></span>(<span id="item2_price"></span>円):
+        </td>
+        <td><input id="item2_count" type="number" min="0"><button id="item2_clear">X</button>個</td>
+      </tr>
+    </tbody>
+  </table>
+  <table>
+    <tr>
+      <td style="width:7em;">お買い上げ数:</td>
+      <td style="width:5em;"><span id="amount"></span>個</td>
+    </tr>
+    <tr>
+      <td>購入代金:</td>
+      <td><span id="payment"></span>円</td>
+    </tr>
+    <tr>
+      <td>消費税:</td>
+      <td><span id="tax"></span>円</td>
+    </tr>
+    <tr>
+      <td>総代金:</td>
+      <td><div id="totalcostcolor"><span id="totalcost"></span>円</div></td>
+    </tr>
+  </table>
+</body>
+</html>
