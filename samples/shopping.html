@@ -44,7 +44,9 @@ $(document).ready(function() {
       for (var i = 0; i < goods_count; i++) {
         bs['item{0}_name'.tmpl(i)]  = 'text';
         bs['item{0}_price'.tmpl(i)] = 'text';
-        bs['item{0}_count'.tmpl(i)] = 'val:int';
+        bs['item{0}_count'.tmpl(i)] = ['val:int', function(value) {
+          this.updateResult();
+        }];
       }
       return bs;
     },
@@ -53,18 +55,6 @@ $(document).ready(function() {
       var goods = this.Model.goods();
       var es = {};
       $.each(goods, function(i, g) {
-        es['item{0}_count'.tmpl(i)] = {
-          change: function(e) {
-            this.updateResult();
-          }
-        };
-/*
-        es['item{0}_count'.tmpl(i)] = {
-          keyup: function(e) {
-            this.updateResult();
-          }
-        };
-*/
         es['item{0}_clear'.tmpl(i)] = {
           click: function(e) {
             this.values['item{0}_count'.tmpl(i)] = 0;

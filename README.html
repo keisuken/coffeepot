@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title> Coffee Pot</title>
+    <style type="text/css">
+body {
+  margin: 0.5em 0.5em 0.5em 0.5em;
+}
+
+body h1:nth-child(1) {
+  margin: 0 0 0.5em 0;
+}
+
+h1 {
+  margin: 1.5em 0 1em 0;
+  padding: 0.2em;
+  border: 1px #c0c0c0 solid;
+  border-radius: 0.1em;
+  color: black;
+  background-color: #e8e8e8;
+  font-size: 200%;
+  font-family: SanSerif;
+  font-weight: bold;
+  text-shadow: none;
+}
+
+h2 {
+  margin: 2em 0 1em 0;
+  padding: 0.2em;
+  border: 1px #c0c0c0 solid;
+  border-radius: 0.1em;
+  color: #202020;
+  background-color: #e8e8e8;
+  font-size: 150%;
+  font-family: SanSerif;
+  font-weight: bold;
+  text-shadow: none;
+}
+
+h3 {
+  margin: 2em 0 1em 0;
+  padding: 0.2em;
+  border: 1px #c0c0c0 solid;
+  border-radius: 0.1em;
+  color: #202020;
+  background-color: #e8e8e8;
+  font-size: 125%;
+  font-family: SanSerif;
+  font-weight: bold;
+  text-shadow: none;
+}
+
+h4 {
+  margin: 2em 0 1em 0;
+  padding: 0.2em;
+  border-bottom: solid 3px #c0c0c0;
+  font-size: 100%;
+  font-family: SanSerif;
+  font-weight: bold;
+  text-shadow: none;
+}
+
+h5 {
+  margin: 2em 0.5em 1em 0.5em;
+  padding: 0.2em;
+  border-bottom: solid 2px #c0c0c0;
+  font-size: 100%;
+  font-family: SanSerif;
+  font-weight: bold;
+  text-shadow: none;
+}
+
+h6 {
+  margin: 2em 1em 1em 1em;
+  padding: 0.2em;
+  font-size: 100%;
+  font-weight: bold;
+  font-family: SanSerif;
+  text-decoration: underline;
+  text-shadow: none;
+}
+
+p {
+  margin: 1em 1em 0.5em 1em;
+  font-family: Serif;
+}
+
+em {
+ font-weight: normal;
+ font-decoration: italic;
+}
+
+storng {
+ font-weight: bold;
+ font-decoration: none;
+}
+
+code {
+  margin: 0;
+  padding: 0.3em;
+}
+
+pre {
+  margin: 1em 1em 1em 1em;
+  padding: 1em;
+  border-radius: 0.3em;
+  border: solid 1px #c0c0c0;
+  font-size: 100%;
+  color: #101010;
+  background-color: #f0f0f0;
+}
+
+a {
+  color: #2020a0;
+}
+
+a:visited {
+  color: #202080;
+}
+
+blockquote {
+  margin: 1em 1em 1em 1em;
+  padding: 0.2em;
+  background-color: #f0f0f0;
+  border: #808080 solid;
+  border-radius: 0.3em;
+  border-width: 0 0 0 4px;
+  text-decoration: none;
+}
+
+table {
+  margin: 1em 1em 1em 1em;
+  border: 1px #c0c0c0 solid;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background-color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+
+th {
+  padding: 0.2em;
+  border: #c0c0c0 solid;
+  border-width: 0 0 1px 1px;
+  background-color: #f0f0f0;
+  font-family: SansSerif;
+  font-weight: normal;
+  text-align: center;
+}
+
+td {
+  padding: 0.2em;
+  border: #c0c0c0 solid;
+  border-width: 0 0 1px 1px;
+  font-family: Serif;
+}
+
+caption {
+  margin: 0;
+  padding: 0.3em;
+  font-familly: SansSerif;
+  font-weight: normal;
+}
+
+hr {
+  margin: 2em 0 2em 0;
+  padding: 1px 0 1px 0;
+  border: solid 1px #c0c0c0;
+  border-radius: 1px;
+  background-color: #c0c0c0;
+}
+
+li {
+  font-family: Serif;
+}</style>
+  </head>
+  <body>
+<h1 id="coffee-pot">Coffee Pot</h1>
+<p>Coffee PotはJavaScript用MVVMフレームワークです。</p>
+<p>以下の特徴を持ちます。</p>
+<ul>
+<li>Viewの値をバインドしてViewModelに保持します</li>
+<li>バインドする値を整形して型変換します</li>
+<li>Viewの入力値をフォーマットして再表示します</li>
+</ul>
+<p><strong>注意: まだ未実装部分があります</strong></p>
+<h2 id="インストール">インストール</h2>
+<pre><code>$ git clone git://github.com/keisuken/coffeepot.git
+</code></pre><h2 id="mvvmパターン">MVVMパターン</h2>
+<p>MVVMはView, ViewModel, Modelの3つにわかれ、それぞれ見た目、見た目に対する操作、ビジネスロジックを担当します。</p>
+<p><img src="docs/images/MVVM.svg" alt="MVVMパターン" title="MVVMパターン"></p>
+<table>
+<thead>
+<tr>
+<th>名前</th>
+<th>詳細</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>View</td>
+<td>プレゼンテーション(HTML(DOM))</td>
+</tr>
+<tr>
+<td>ViewModel</td>
+<td>プレゼンテーションロジック(イベント処理とデータ)</td>
+</tr>
+<tr>
+<td>Model</td>
+<td>ビジネスロジックとデータ</td>
+</tr>
+</tbody>
+</table>
+<h2 id="view">View</h2>
+<p>Viewは見た目を担当し、HTMLとして記述されます。</p>
+<p>DOM(HTMLのタグ)に一意のid属性を付けることによってViewModelにバインドできるようになり操作できます。</p>
+<pre><code>&lt;!-- Form --&gt;
+&lt;div&gt;
+  &lt;input id=&quot;name&quot; type=&quot;text&quot;&gt;
+  &lt;input id=&quot;mail&quot; type=&quot;text&quot;&gt;
+  &lt;select id=&quot;sex&quot;&gt;
+    &lt;option value=&quot;1&quot;&gt;Male&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Female&lt;/option&gt;
+    &lt;option value=&quot;0&quot;&gt;Unkown&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;input id=&quot;age&quot; type=&quot;text&quot;&gt;
+&lt;/div&gt;
+
+&lt;!-- Preview table --&gt;
+&lt;div&gt;
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Name&lt;/td&gt;
+        &lt;td&gt;Mail&lt;/td&gt;
+        &lt;td&gt;Sex&lt;/td&gt;
+        &lt;td&gt;Age&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td id=&quot;preview_name&quot;&gt;&lt;/td&gt;
+        &lt;td id=&quot;preview_mail&quot;&gt;&lt;/td&gt;
+        &lt;td id=&quot;preview_sex&quot;&gt;&lt;/td&gt;
+        &lt;td id=&quot;preview_age&quot;&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+</code></pre><h2 id="viewmodel">ViewModel</h2>
+<p>ViewModelはViewのプレゼンテーションロジックを担当し、入力値などのViewの値をバインドします。</p>
+<p>val属性を指定した場合は自動的にViewModelのvaluesに保持されます。</p>
+<p>Viewにはバリデーションやフォーマットなどのアクションを設定でき、必要に応じてViewの値をフォーマットして再表示したり、型変換を行ってViewModelのvaluesに格納されます。</p>
+<pre><code>bindings: {
+  // &lt;input id=&quot;value0&quot; type=&quot;text&quot; values=&quot;&quot;&gt;
+  value0: &#39;val&#39;,
+  // &lt;img id=&quot;image0&quot; src=&quot;&quot;&gt;
+  image0$src: &#39;attr&#39;,
+  // &lt;span id=&quot;message&quot;&gt;&lt;/span&gt;
+  message: &#39;text&#39;,
+  // &lt;div id=&quot;urlList&quot;&gt;&lt;/div&gt;
+  urlList: &#39;html&#39;,
+},
+events: {
+  value0: {
+    change: function(event) {
+      this.updateResult();
+    }
+  },
+  submit: {
+    click: function(event) {
+      ...
+      this.Model.submit(value0, value1, ...);
+    }
+  }
+}
+</code></pre><h2 id="model">Model</h2>
+<p>Modelは見た目に関係ないビジネスロジックを担当し、ViewModelから呼び出され、サーバを呼び出したり、場合によってはViewModelを呼び出したりしながら、アプリケーションの目的を果たします。</p>
+<h2 id="appendix">Appendix</h2>
+<h3 id="コード例">コード例</h3>
+<pre><code>$(document).ready(function() {
+
+  // ViewModel
+  var ViewModel = {
+
+    // Initialize
+
+    init: function() {
+      // 初期化コード
+    },
+
+    // バインド
+
+    bindings: [
+      url: &#39;val&#39;,
+      title: &#39;val&#39;,
+      tags: &#39;val&#39;
+    ],
+
+    events: {
+      url: {
+        &#39;change&#39;: function(event) {
+          this.Model.getTitle(this.$.url);
+        }
+      }),
+      submit: {
+        click: function(event) {
+          var _ = this.values;
+          this.Model.submit(_.url, _.title, _.tags);
+        }
+      }
+    },
+
+    // Update title.
+    updateTitle: function(title) {
+      this.set(&#39;title&#39;, title);
+    }
+
+  };
+
+  // Model
+  var Model = {
+
+    // Get web page title.
+    getTitle: function(url) {
+      ...
+    },
+
+    // Submit form.
+    submit: function(url, title, tags) {
+      ...
+    }
+  };
+
+  CoffeePot.set(VideModel, Model);
+
+});
+
+...
+
+&lt;input id=&quot;url&quot; type=&quot;text&quot; value=&quot;&quot;&gt;
+&lt;input id=&quot;title&quot; type=&quot;text&quot; value=&quot;&quot;&gt;
+&lt;input id=&quot;tags&quot; type=&quot;text&quot; value=&quot;&quot;&gt;
+&lt;input id=&quot;submit&quot; type=&quot;submit&quot; value=&quot;Submit&quot;&gt;
+
+...
+</code></pre><h2 id="api">API</h2>
+<h3 id="メソッド">メソッド</h3>
+<h4 id="viewmodel">ViewModel</h4>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>init</td>
+<td>初期化する</td>
+</tr>
+<tr>
+<td>bind</td>
+<td>データおよびイベントを設定する</td>
+</tr>
+<tr>
+<td>unbind</td>
+<td>データおよびイベントを解除する</td>
+</tr>
+</tbody>
+</table>
+<h4 id="model">Model</h4>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>init</td>
+<td>初期化する</td>
+</tr>
+</tbody>
+</table>
+<h3 id="プロパティ">プロパティ</h3>
+<h4 id="viewmodel">ViewModel</h4>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bindings</td>
+<td>データバインド情報</td>
+</tr>
+<tr>
+<td>events</td>
+<td>イベント情報</td>
+</tr>
+<tr>
+<td>values</td>
+<td>データプロパティ</td>
+</tr>
+</tbody>
+</table>
+<h3 id="イベント">イベント</h3>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>blur</td>
+<td>フォーカスが外れた</td>
+</tr>
+<tr>
+<td>focus</td>
+<td>フォーカスされた</td>
+</tr>
+<tr>
+<td>change</td>
+<td>入力内容が変更された</td>
+</tr>
+<tr>
+<td>click</td>
+<td>クリックされた</td>
+</tr>
+<tr>
+<td>dblClick</td>
+<td>ダブルクリックされた</td>
+</tr>
+<tr>
+<td>keuUp</td>
+<td>キーを離した</td>
+</tr>
+<tr>
+<td>keyDown</td>
+<td>キーを押した</td>
+</tr>
+<tr>
+<td>keyPress</td>
+<td>キーを打った</td>
+</tr>
+<tr>
+<td>mouseUp</td>
+<td>マウスボタンを押した</td>
+</tr>
+<tr>
+<td>mouseDown</td>
+<td>マウスボタンを離した</td>
+</tr>
+<tr>
+<td>mouseMove</td>
+<td>マウスが移動した</td>
+</tr>
+<tr>
+<td>mouseOut</td>
+<td>領域からマウスが外れた</td>
+</tr>
+<tr>
+<td>mouseOver</td>
+<td>領域にマウスが入った</td>
+</tr>
+<tr>
+<td>mouseMove</td>
+<td>マウスを動かした</td>
+</tr>
+</tbody>
+</table>
+<h3 id="バインド">バインド</h3>
+<p>ViewModelのデータバインドの定義です。</p>
+<p>1.DOM種類
+2.型(Converter)
+3.整形(Reducer)
+4.フォーマッタ(Formatter)</p>
+<h4 id="dom種類">DOM種類</h4>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>詳細</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>FORMの入力</td>
+</tr>
+<tr>
+<td>attr</td>
+<td>属性</td>
+</tr>
+<tr>
+<td>class</td>
+<td>クラス</td>
+</tr>
+<tr>
+<td>text</td>
+<td>テキスト</td>
+</tr>
+<tr>
+<td>html</td>
+<td>HTML</td>
+</tr>
+</tbody>
+</table>
+<h4 id="型-converter-">型(Converter)</h4>
+<table>
+<thead>
+<tr>
+<th>型</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>text</td>
+<td>テキスト</td>
+</tr>
+<tr>
+<td>int</td>
+<td>整数</td>
+</tr>
+<tr>
+<td>float</td>
+<td>浮動小数点</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>論理</td>
+</tr>
+<tr>
+<td>date</td>
+<td>日付(未実装)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="整形-reducer-">整形(Reducer)</h4>
+<table>
+<thead>
+<tr>
+<th>型</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>trim</td>
+<td>前後のスペース削除</td>
+</tr>
+<tr>
+<td>default</td>
+<td>空の場合のデフォルト値</td>
+</tr>
+<tr>
+<td>max</td>
+<td>最大文字数</td>
+</tr>
+<tr>
+<td>replace</td>
+<td>正規表現文字置換</td>
+</tr>
+</tbody>
+</table>
+<h4 id="フォーマッタ-formatter-">フォーマッタ(Formatter)</h4>
+<table>
+<thead>
+<tr>
+<th>型</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>comma3</td>
+<td>3カンマ区切り</td>
+</tr>
+<tr>
+<td>comma4</td>
+<td>4カンマ区切り</td>
+</tr>
+<tr>
+<td>date</td>
+<td>日付</td>
+</tr>
+<tr>
+<td>format</td>
+<td>sprintf相当</td>
+</tr>
+</tbody>
+</table>
+<h4 id="例">例</h4>
+<pre><code>binds: {
+  name: &#39;val:int:trim,max(100):comma3&#39;,
+  amount: &#39;val:int:trim:comma3&#39;,
+  ...
+}
+</code></pre>  </body>
+</html>

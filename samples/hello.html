@@ -12,7 +12,7 @@ $(document).ready(function() {
   var ViewModel = {
 
     bindings: {
-      name: 'val',
+      name: ['val', function(value) {this.updateMessage();}],
       message: 'text'
     },
 
@@ -20,11 +20,6 @@ $(document).ready(function() {
       clear: {
         click: function(event) {
           this.values.name = '';
-          this.updateMessage();
-        }
-      },
-      name: {
-        change: function(event) {
           this.updateMessage();
         }
       }
