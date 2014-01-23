@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+$(document).ready(function() {
+  var valuesObj = $('<div/>').attr('id', 'values');
+  var values = valuesObj[0];
+  var fooValue = '';
+  Object.defineProperty(values, "foo", {
+    enumerable: false,
+    configurable: true,
+    set: function(value) {
+      fooValue = value;
+    },
+    get: function() {
+      return fooValue;
+    }
+  });
+  values.foo = 'abc';
+  $('#message').text(values.foo);
+});
+    </script>
+  </head>
+  <body>
+    <div>Message: <span id="message"></span></div>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script type="text/javascript">
+
+function num2comma3(n) {
+  var result = '';
+  var minus = n < 0 ? '-' : '';
+  var str = '' + Math.abs(n);
+  var i = str.indexOf('.');
+  var floatStr = i >= 0 ? str.substring(i) : '';
+  var intStr = i >= 0 ? str.substring(0, i) : str;
+  result = intStr.substring(intStr.length - 3);
+  intStr = intStr.substring(0, intStr.length - 3);
+  while (intStr.length > 0) {
+    result = intStr.substring(intStr.length - 3) + ',' + result;
+    intStr = intStr.substring(0, intStr.length - 3);
+  }
+  result = minus + (result == '' ? '0' : result) + floatStr;
+  return result;
+}
+
+var nums = [
+  0,
+  0.1,
+  1.1,
+  12.1,
+  123.123,
+  1234.1,
+  12345.12345,
+  123456.12,
+  -0.1,
+  -1.1,
+  -12.1,
+  -123,123,
+  -1234.1,
+  -12345.12345,
+  -123456.12
+];
+
+
+for (var i = 0; i < nums.length; i++) {
+  console.log(num2comma3(nums[i]));
+}
+
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

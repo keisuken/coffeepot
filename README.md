@@ -27,7 +27,7 @@ $ git clone git://github.com/keisuken/coffeepot.git
 
 MVVMはView, ViewModel, Modelの3つにわかれ、それぞれ見た目、見た目に対する操作、ビジネスロジックを担当します。
 
-![MVVMパターン](docs/images/MVVM.svg "MVVMパターン")
+![MVVMパターン](docs/images/MVVM.png "MVVMパターン")
 
 名前      | 詳細
 ----------|----------------------------
@@ -92,7 +92,7 @@ Viewにはバリデーションやフォーマットなどのアクションを�
 ```
 bindings: {
   // <input id="value0" type="text" values="">
-  value0: 'val',
+  value0: ['val', function(value) {this.updateResult();}],
   // <img id="image0" src="">
   image0$src: 'attr',
   // <span id="message"></span>
@@ -101,11 +101,6 @@ bindings: {
   urlList: 'html',
 },
 events: {
-  value0: {
-    change: function(event) {
-      this.updateResult();
-    }
-  },
   submit: {
     click: function(event) {
       ...

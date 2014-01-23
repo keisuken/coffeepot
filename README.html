@@ -196,7 +196,7 @@ li {
 <pre><code>$ git clone git://github.com/keisuken/coffeepot.git
 </code></pre><h2 id="mvvmパターン">MVVMパターン</h2>
 <p>MVVMはView, ViewModel, Modelの3つにわかれ、それぞれ見た目、見た目に対する操作、ビジネスロジックを担当します。</p>
-<p><img src="docs/images/MVVM.svg" alt="MVVMパターン" title="MVVMパターン"></p>
+<p><img src="docs/images/MVVM.png" alt="MVVMパターン" title="MVVMパターン"></p>
 <table>
 <thead>
 <tr>
@@ -261,7 +261,7 @@ li {
 <p>Viewにはバリデーションやフォーマットなどのアクションを設定でき、必要に応じてViewの値をフォーマットして再表示したり、型変換を行ってViewModelのvaluesに格納されます。</p>
 <pre><code>bindings: {
   // &lt;input id=&quot;value0&quot; type=&quot;text&quot; values=&quot;&quot;&gt;
-  value0: &#39;val&#39;,
+  value0: [&#39;val&#39;, function(value) {this.updateResult();}],
   // &lt;img id=&quot;image0&quot; src=&quot;&quot;&gt;
   image0$src: &#39;attr&#39;,
   // &lt;span id=&quot;message&quot;&gt;&lt;/span&gt;
@@ -270,11 +270,6 @@ li {
   urlList: &#39;html&#39;,
 },
 events: {
-  value0: {
-    change: function(event) {
-      this.updateResult();
-    }
-  },
   submit: {
     click: function(event) {
       ...

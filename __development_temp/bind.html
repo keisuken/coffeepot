@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+/*
+DOMNodeInserted
+DOMNodeRemoved
+DOMSubtreeModified
+DOMAttrModified
+DOMCharacterDataModified
+*/
+        // DOMSubtreeModified: ターゲット化が変更された
+        // DOMAttrModified: ターゲットの属性が変更された
+        $('#value').on('keydown keypress DOMAttrModified propertychange', function() {
+          $('#message').text('changed');
+          setTimeout(function() {
+            $('#message').text('');
+          }, 500);
+        });
+        setTimeout(function() {
+          $('#value').val('abc');
+        }, 1000);
+      });
+    </script>
+  </head>
+  <body>
+    <input id="value" type="text" value="">
+    <div id="message"></div>
+  </body>
+</html>
