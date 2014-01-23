@@ -33,7 +33,7 @@ $(document).ready(function() {
   var Model = {
 
     createMessage: function(name) {
-      return  name != '' ? 'Hello, {0}!'.tmpl(name) : '';
+      return  name !== '' ? 'Hello, {0}!'.tmpl(name) : '';
     }
   };
 

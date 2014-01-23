@@ -12,13 +12,11 @@ describe("足し算アプリ", function() {
         clear_a: {
           click: function(e) {
             this.values.value_a = 0;
-            this.printResult();
           }
         },
         clear_b: {
           click: function(e) {
             this.values.value_b = 0;
-            this.printResult();
           }
         }
       },
