@@ -10,14 +10,10 @@ describe("足し算アプリ", function() {
       },
       events: {
         clear_a: {
-          click: function(e) {
-            this.values.value_a = 0;
-          }
+          click: function(e) {this.values.value_a = 0;}
         },
         clear_b: {
-          click: function(e) {
-            this.values.value_b = 0;
-          }
+          click: function(e) {this.values.value_b = 0;}
         }
       },
       printResult: function() {

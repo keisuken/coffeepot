@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Coffee Pot: Person</title>
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../lib/coffeepot.js"></script>
+    <script>
+$(document).ready(function() {
+
+  var ViewModel = {
+
+    bindings: {
+      name: ['val', function(value) {this.printPreview()}],
+      sex: ['val:int', function(value) {this.printPreview()}],
+      zip1: ['val:int', function(value) {this.printPreview()}],
+      zip2: ['val:int', function(value) {this.printPreview()}],
+      address: ['val', function(value) {this.printPreview()}],
+      preview_name: 'text',
+      preview_sex: 'text',
+      preview_zip: 'text',
+      preview_address: 'text'
+    },
+
+    events: {
+    },
+
+    printPreview: function() {
+      var values = this.values;
+      values.preview_name = values.name;
+      values.preview_sex = values.sex;
+      values.preview_zip = "{0}-{1}".tmpl(values.zip1, values.zip2);
+      values.preview_address = values.address;
+    }
+  };
+
+  var Model = {
+  };
+
+  CoffeePot.set(ViewModel, Model);
+
+});
+    </script>
+  </head>
+  <body>
+    <h1>Coffee Pot: Person</h1>
+    <h2>Form</h2>
+    <table>
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td><input id="name" type="text" value=""></td>
+        </tr>
+        <tr>
+          <th>Sex:</th>
+          <td>
+            <select id="sex">
+              <option value="1">Male</option>
+              <option value="2">Female</option>
+              <option value="3">Unkown</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>Zip:</th>
+          <td>
+            <input id="zip1" type="text" value="">-<input id="zip2" type="text" value="">
+          </td>
+        </tr>
+        <tr>
+          <th>Address:</th>
+          <td>
+            <input id="address" type="text" value="">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h2>Preview data</h2>
+    <table>
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td id="preview_name"></td>
+        </tr>
+        <tr>
+          <th>Sex:</th>
+          <td id="preview_sex"></td>
+        </tr>
+        <tr>
+          <th>Zip:</th>
+          <td id="preview_zip"></td>
+        </tr>
+        <tr>
+          <th>Address:</th>
+          <td id="preview_address"></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

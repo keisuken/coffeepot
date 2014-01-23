@@ -10,6 +10,10 @@ Coffee PotはJavaScript用MVVMフレームワークです。
 
 **注意: まだ未実装部分があります**
 
+* 整形(Reducer)
+* フォーマット(Fomatter)
+
+
 
 ## インストール
 
