@@ -16,6 +16,10 @@ Coffee PotはJavaScript用MVVMフレームワークです。
 $ git clone git://github.com/keisuken/coffeepot.git
 ```
 
+## 必要なライブラリ
+
+jQueryが必要です。レポジトリの中に含まれています。
+
 
 
 ## MVVMパターン
