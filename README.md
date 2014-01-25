@@ -8,11 +8,6 @@ Coffee PotはJavaScript用MVVMフレームワークです。
 * バインドする値を整形して型変換します
 * Viewの入力値をフォーマットして再表示します
 
-**注意: まだ未実装部分があります**
-
-* 整形(Reducer)
-* フォーマット(Fomatter)
-
 
 
 ## インストール
@@ -260,11 +255,17 @@ mouseMove | マウスを動かした
 
 ViewModelのデータバインドの定義です。
 
+1. DOM種類
+2. 型(Converter)
+3. 整形(Reducer)
+4. フォーマッタ(Formatter)
 
-1.DOM種類
-2.型(Converter)
-3.整形(Reducer)
-4.フォーマッタ(Formatter)
+```
+bindings: {
+  name: 'val:text:trim,default(),max(100):',
+  amount: 'val:int:trim:comma3'
+}
+```
 
 
 

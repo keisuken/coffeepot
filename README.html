@@ -187,11 +187,6 @@ li {
 <li>バインドする値を整形して型変換します</li>
 <li>Viewの入力値をフォーマットして再表示します</li>
 </ul>
-<p><strong>注意: まだ未実装部分があります</strong></p>
-<ul>
-<li>整形(Reducer)</li>
-<li>フォーマット(Fomatter)</li>
-</ul>
 <h2 id="インストール">インストール</h2>
 <pre><code>$ git clone git://github.com/keisuken/coffeepot.git
 </code></pre><h2 id="mvvmパターン">MVVMパターン</h2>
@@ -480,11 +475,17 @@ events: {
 </table>
 <h3 id="バインド">バインド</h3>
 <p>ViewModelのデータバインドの定義です。</p>
-<p>1.DOM種類
-2.型(Converter)
-3.整形(Reducer)
-4.フォーマッタ(Formatter)</p>
-<h4 id="dom種類">DOM種類</h4>
+<ol>
+<li>DOM種類</li>
+<li>型(Converter)</li>
+<li>整形(Reducer)</li>
+<li>フォーマッタ(Formatter)</li>
+</ol>
+<pre><code>bindings: {
+  name: &#39;val:text:trim,default(),max(100):&#39;,
+  amount: &#39;val:int:trim:comma3&#39;
+}
+</code></pre><h4 id="dom種類">DOM種類</h4>
 <table>
 <thead>
 <tr>
