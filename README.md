@@ -1,6 +1,6 @@
-# ! Coffee Pot
+# Coffee Pot
 
-[Logo](docs/images/CoffeePot-64.png)
+![Logo](docs/images/CoffeePot-64.png "Logo")
 
 Coffee PotはJavaScript用MVVMフレームワークです。
 
