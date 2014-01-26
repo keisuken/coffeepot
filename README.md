@@ -1,4 +1,4 @@
-# ![Coffee Pot](docs/images/CoffeePot-32.png) Coffee Pot ![Coffee Pot](docs/images/CoffeePot-32.png)
+# ![Logo](docs/images/CoffeePot-32.png) Coffee Pot ![Logo](docs/images/CoffeePot-32.png)
 
 Coffee PotはJavaScript用MVVMフレームワークです。
 
@@ -267,7 +267,8 @@ ViewModelのデータバインドの定義です。
 ```
 bindings: {
   name: 'val:text:trim,default(),max(100):',
-  amount: 'val:int:trim:comma3'
+  amount: 'val:int:trim:comma3',
+  phone: 'val:text:trim:replace([^0-9]+|)'
 }
 ```
 
