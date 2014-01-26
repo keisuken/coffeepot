@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title> ![Coffee Pot](docs/images/CoffeePot-32.png) Coffee Pot ![Coffee Pot](docs/images/CoffeePot-32.png)</title>
+    <title> ! Coffee Pot</title>
     <style type="text/css">
 body {
   margin: 0.5em 0.5em 0.5em 0.5em;
@@ -179,7 +179,8 @@ li {
 }</style>
   </head>
   <body>
-<h1 id="-coffee-pot-docs-images-coffeepot-32-png-coffee-pot-coffee-pot-docs-images-coffeepot-32-png-"><img src="docs/images/CoffeePot-32.png" alt="Coffee Pot"> Coffee Pot <img src="docs/images/CoffeePot-32.png" alt="Coffee Pot"></h1>
+<h1 id="-coffee-pot">! Coffee Pot</h1>
+<p><a href="docs/images/CoffeePot-64.png">Logo</a></p>
 <p>Coffee PotはJavaScript用MVVMフレームワークです。</p>
 <p>以下の特徴を持ちます。</p>
 <ul>
@@ -257,8 +258,8 @@ li {
 <p>val属性を指定した場合は自動的にViewModelのvaluesに保持されます。</p>
 <p>Viewにはバリデーションやフォーマットなどのアクションを設定でき、必要に応じてViewの値をフォーマットして再表示したり、型変換を行ってViewModelのvaluesに格納されます。</p>
 <pre><code>bindings: {
-  // &lt;input id=&quot;value0&quot; type=&quot;text&quot; values=&quot;&quot;&gt;
-  value0: [&#39;val&#39;, function(value) {this.updateResult();}],
+  // &lt;input id=&quot;name&quot; type=&quot;text&quot; values=&quot;&quot;&gt;
+  name: [&#39;val&#39;, function(value) {this.updateResult();}],
   // &lt;img id=&quot;image0&quot; src=&quot;&quot;&gt;
   image0$src: &#39;attr&#39;,
   // &lt;span id=&quot;message&quot;&gt;&lt;/span&gt;
@@ -292,15 +293,15 @@ events: {
     // バインド
 
     bindings: [
-      url: &#39;val&#39;,
-      title: &#39;val&#39;,
-      tags: &#39;val&#39;
+      url: &#39;val:trim:max(8192)&#39;,
+      title: &#39;val:trim:max(100)&#39;,
+      tags: &#39;val:trim:max(100)&#39;
     ],
 
     events: {
       url: {
-        &#39;change&#39;: function(event) {
-          this.Model.getTitle(this.$.url);
+        change: function(event) {
+          this.Model.getTitle(this.values.url);
         }
       }),
       submit: {
@@ -483,11 +484,7 @@ events: {
 <li>整形(Reducer)</li>
 <li>フォーマッタ(Formatter)</li>
 </ol>
-<pre><code>bindings: {
-  name: &#39;val:text:trim,default(),max(100):&#39;,
-  amount: &#39;val:int:trim:comma3&#39;
-}
-</code></pre><h4 id="dom種類">DOM種類</h4>
+<h4 id="dom種類">DOM種類</h4>
 <table>
 <thead>
 <tr>
@@ -604,10 +601,10 @@ events: {
 </tbody>
 </table>
 <h4 id="例">例</h4>
-<pre><code>binds: {
-  name: &#39;val:int:trim,max(100):comma3&#39;,
+<pre><code>bindings: {
+  name: &#39;val:text:trim,default(),max(100):&#39;,
   amount: &#39;val:int:trim:comma3&#39;,
-  ...
+  cardno: &#39;val:text:trim:replace([^0-9]+|g|)&#39;
 }
 </code></pre>  </body>
 </html>

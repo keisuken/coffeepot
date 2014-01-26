@@ -1,4 +1,6 @@
-# ![Logo](docs/images/CoffeePot-32.png) Coffee Pot ![Logo](docs/images/CoffeePot-32.png)
+# ! Coffee Pot
+
+[Logo](docs/images/CoffeePot-64.png)
 
 Coffee PotはJavaScript用MVVMフレームワークです。
 
@@ -15,6 +17,8 @@ Coffee PotはJavaScript用MVVMフレームワークです。
 ```
 $ git clone git://github.com/keisuken/coffeepot.git
 ```
+
+
 
 ## 必要なライブラリ
 
@@ -90,8 +94,8 @@ Viewにはバリデーションやフォーマットなどのアクションを�
 
 ```
 bindings: {
-  // <input id="value0" type="text" values="">
-  value0: ['val', function(value) {this.updateResult();}],
+  // <input id="name" type="text" values="">
+  name: ['val', function(value) {this.updateResult();}],
   // <img id="image0" src="">
   image0$src: 'attr',
   // <span id="message"></span>
@@ -138,15 +142,15 @@ $(document).ready(function() {
     // バインド
 
     bindings: [
-      url: 'val',
-      title: 'val',
-      tags: 'val'
+      url: 'val:trim:max(8192)',
+      title: 'val:trim:max(100)',
+      tags: 'val:trim:max(100)'
     ],
 
     events: {
       url: {
-        'change': function(event) {
-          this.Model.getTitle(this.$.url);
+        change: function(event) {
+          this.Model.getTitle(this.values.url);
         }
       }),
       submit: {
@@ -264,14 +268,6 @@ ViewModelのデータバインドの定義です。
 3. 整形(Reducer)
 4. フォーマッタ(Formatter)
 
-```
-bindings: {
-  name: 'val:text:trim,default(),max(100):',
-  amount: 'val:int:trim:comma3',
-  phone: 'val:text:trim:replace([^0-9]+|)'
-}
-```
-
 
 
 #### DOM種類
@@ -323,9 +319,9 @@ format   | sprintf相当
 #### 例
 
 ```
-binds: {
-  name: 'val:int:trim,max(100):comma3',
+bindings: {
+  name: 'val:text:trim,default(),max(100):',
   amount: 'val:int:trim:comma3',
-  ...
+  cardno: 'val:text:trim:replace([^0-9]+|g|)'
 }
 ```
